@@ -14,7 +14,8 @@ class admin extends \UeModel{
 		$data = [];
 		$times = timeRange();
 		$timee = timeRange(0,1);
-		
+        $today = date('Y-m-d');  // 获取当前日期
+
 		$data['user']['count'] = db('user')->where('appid = ?',[$this->appid])->count();//统计用户数
 		$data['user']['diary_count'] = db('logs')->where('appid = ? and type = ? and time between ? and ?',[$this->appid,'signIn',$times,$timee])->count();//签到数
 		$kami_res = db('kami')->where('appid = ?',[$this->appid])->fetch("count(*) as count,count(case when use_time>0 then 1 end) as use_count");//统计卡密数
@@ -24,7 +25,24 @@ class admin extends \UeModel{
 		$data['message'] = $message_res;
 
 		$data['order'] = db('order')->where('appid = ?',[$this->appid])->fetch("count(*) as all_os,count(case when ptype='ali' then 1 else 0 end) as ali_os,IFNULL(sum(case when state = 2 and add_time between {$times} and {$timee} then money else 0 end),0) as day_money,IFNULL(sum(case when state = 2 then money else 0 end),0) as total_money");
-		
+
+        // 统计总访问次数和总访问人数
+        $totalVisits = db('counts')->where('appid = ?', [$this->appid])->fetch("SUM(count) as total_visits");
+        $totalVisitors = db('counts')->where('appid = ?', [$this->appid])->count("DISTINCT ip");
+
+        // 统计当日访问次数和当日访问人数
+        $todayVisits = db('counts')->where('appid = ? and date = ?', [$this->appid, $today])->fetch("SUM(count) as today_visits");
+        $todayVisitors = db('counts_today')->where('appid = ? and date = ?', [$this->appid, $today])->fetch("COUNT(DISTINCT visitors) as today_visitors");
+
+        // 将统计数据加入$data数组
+        $data['visits'] = [
+            'total_visits' => $totalVisits ? $totalVisits['total_visits'] : 0,
+            'total_visitors' => $totalVisitors,
+            'today_visits' => $todayVisits ? $todayVisits['today_visits'] : 0,
+            'today_visitors' => $todayVisitors ? $todayVisitors['today_visitors'] : 0
+        ];
+
+
 		$census = [];
 		$o_db = db('order');
 		for ($i=0; $i<15; $i++){
