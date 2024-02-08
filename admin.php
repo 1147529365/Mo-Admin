@@ -3,7 +3,7 @@
  * 系统后台入口文件
  * @link      http://www.Uephp.com
  * @copyright Copyright (c) 2022-2032 
- * @author    阳光男孩
+ * @author    陌沫
  * @version   1.0.0
 **/
 $_GET['s'] = 'admin/'.(isset($_GET['p']) && !empty($_GET['p']) ? addslashes($_GET['p']) : 'index');//操作页面
