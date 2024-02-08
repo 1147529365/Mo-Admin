@@ -357,13 +357,28 @@
                 zoom: {enabled: !1},
                 legend: {show: !1},
                 xaxis: {type: "string", categories: t, tooltip: {enabled: !1}, axisBorder: {show: !1}},
-                yaxis: {
+                yaxis: [{
+                    title: {
+                        text: '总次数',
+                    },
                     labels: {
-                        formatter: function (e) {
-                            return e + "人/次"
-                        }, offsetX: -15
+                        formatter: function (val) {
+                            return val + "次"; // 总次数使用 "次"
+                        },
+                        offsetX: -15
                     }
-                }
+                }, {
+                    opposite: true,
+                    title: {
+                        text: '总人数',
+                    },
+                    labels: {
+                        formatter: function (val) {
+                            return val + "人"; // 总人数使用 "人"
+                        },
+                        offsetX: -15
+                    }
+                }],
             };
             new ApexCharts(document.querySelector("#revenue-visit"), s).render()
         }

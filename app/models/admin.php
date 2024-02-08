@@ -44,8 +44,8 @@ class admin extends \UeModel{
 
 
         // 假设你已经有了一个获取日期范围数组的函数
-        $dateRangeY = array_reverse(dateArrY(15)); // 获取过去15天的日期数组
-        $dateRange = array_reverse(dateArr(15)); // 获取过去15天的日期数组
+        $dateRangeY = array_reverse(dateArrY(7)); // 获取过去7天的日期数组
+        $dateRange = array_reverse(dateArr(7)); // 获取过去7天的日期数组
         $todayVisitsData = [];
         $todayVisitorsData = [];
 
@@ -73,13 +73,13 @@ class admin extends \UeModel{
 
         $census = [];
 		$o_db = db('order');
-		for ($i=0; $i<15; $i++){
+		for ($i=0; $i<7; $i++){
 		    $tmp_db = $o_db->where('add_time between ? and ?', [timeRange(-$i),timeRange(-$i,1)])->fetch("count(*) as all_os,SUM(CASE state WHEN 2 THEN 1 ELSE 0 END) as success_os");
 			$census['all'][$i] = intval($tmp_db['all_os']);
 			$census['success'][$i] = intval($tmp_db['success_os']);
 		}
 		
-		$data['order']['census']['date'] = array_reverse(dateArr(15));
+		$data['order']['census']['date'] = array_reverse(dateArr(7));
 		$data['order']['census']['all'] = array_reverse($census['all']);
 		$data['order']['census']['success'] = array_reverse($census['success']);
 		

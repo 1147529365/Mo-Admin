@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="33194fff-aaee-4419-8f20-fe0a4939e328" name="更改" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/caches/u_homedata1000.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/caches/u_homedata1000.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/admin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/admin/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/admin/home.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +47,7 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -60,7 +64,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1707384215755</updated>
-      <workItem from="1707384217122" duration="15466000" />
+      <workItem from="1707384217122" duration="17088000" />
     </task>
     <servers />
   </component>
