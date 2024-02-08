@@ -43,4 +43,7 @@ return [
     'img_group_edit'=>'编辑图片组',
     'img_group_del'=>'删除图片组',
     'img_edit_state'=>'编辑图片状态',
+    'UpCount'=>'记录IP访问',
+    'setFile'=>'API更新文章',
+    'GetNotice'=>'API获取公告内容',
 ];

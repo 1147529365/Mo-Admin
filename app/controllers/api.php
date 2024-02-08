@@ -1537,7 +1537,7 @@ class apiController extends Ue
 
             // 记录日志并返回公告内容
             $this->__log($Ures['id'], $this->m);
-            $this->out->setData($notice)->e(200, '查询成功');
+            $this->out->setData($notice)->e(200, '获取成功');
         } else {
             $this->__log($Ures['id'], $this->m, 201);
             $this->out->setData("请检查参数是否正确")->e(201, '查询失败');
