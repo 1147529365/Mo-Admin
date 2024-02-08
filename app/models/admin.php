@@ -43,7 +43,35 @@ class admin extends \UeModel{
         ];
 
 
-		$census = [];
+        // 假设你已经有了一个获取日期范围数组的函数
+        $dateRangeY = array_reverse(dateArrY(15)); // 获取过去15天的日期数组
+        $dateRange = array_reverse(dateArr(15)); // 获取过去15天的日期数组
+        $todayVisitsData = [];
+        $todayVisitorsData = [];
+
+// 遍历日期范围并获取对应的统计数据
+        foreach ($dateRangeY as $date) {
+            // 当日总访问次数
+            $dayVisits = db('counts')->where('appid = ? and date = ?', [$this->appid, $date])->fetch("SUM(count) as visits");
+            $todayVisitsData[] = isset($dayVisits['visits']) && $dayVisits['visits'] !== '' ? (int)$dayVisits['visits'] : 0;
+
+
+            // 当日访问人数
+            $dayVisitors = db('counts_today')->where('appid = ? and date = ?', [$this->appid, $date])->fetch("COUNT(DISTINCT visitors) as visitors");
+            $todayVisitorsData[] = isset($dayVisitors['visitors']) && $dayVisitors['visitors'] !== '' ? (int)$dayVisitors['visitors'] : 0;
+
+        }
+
+// 将访问次数和访问人数加入$data数组，以便前端绘制折线图
+        $data['visit_stats'] = [
+            'date' => $dateRange,
+            'visits' => $todayVisitsData,// 当日总访问次数
+            'visitors' => $todayVisitorsData// 当日访问人数
+        ];
+
+
+
+        $census = [];
 		$o_db = db('order');
 		for ($i=0; $i<15; $i++){
 		    $tmp_db = $o_db->where('add_time between ? and ?', [timeRange(-$i),timeRange(-$i,1)])->fetch("count(*) as all_os,SUM(CASE state WHEN 2 THEN 1 ELSE 0 END) as success_os");

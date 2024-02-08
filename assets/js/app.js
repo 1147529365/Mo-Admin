@@ -2684,7 +2684,7 @@ $(function () {
         dataType: "json",
         success: function (a) {
             if (200 == a.code) {
-                $("#log").find("div:first").removeClass("col-md-12").addClass("col-md-8"), $("#log").append('<div class="col-md-4"><div class="card shadow eq-card timeline"><div class="card-header"><strong class="card-title">' + utf8to16(base64decode("5pyA5paw6LWE6K6v")) + '</strong><a class="float-right small text-muted" href="' + utf8to16(base64decode("aHR0cDovL3VzZXIudXZlcmlmLmNvbS8=")) + '">' + utf8to16(base64decode("5pu05aSa")) + '</a></div><div class="card-body" data-simplebar style="height: 360px; overflow-y: auto; overflow-x: hidden;" id="news"></div></div></div>');
+                $("#log").find("div:first").removeClass("col-md-12").addClass("col-md-8"), $("#log").append('<div class="col-md-4"><div class="card shadow eq-card timeline"><div class="card-header"><strong class="card-title">' + utf8to16(base64decode("5Y6G5Y+y54mI5pys")) + '</strong><a class="float-right small text-muted" href="' + utf8to16(base64decode("aHR0cDovL3VzZXIudXZlcmlmLmNvbS8=")) + '">' + utf8to16(base64decode("5pu05aSa")) + '</a></div><div class="card-body" data-simplebar style="height: 360px; overflow-y: auto; overflow-x: hidden;" id="news"></div></div></div>');
                 for (var e = 0; e < a.data.length; e++) $("#news").append("<a href=\"javascript:seeNews('" + a.data[e].title + "','" + a.data[e].content + '\');" class="pb-3 timeline-item item-primary text-decoration-none"><div class="pl-5"><div class="mb-1 small"><strong>' + a.data[e].title + '</strong></div><p class="small text-muted">时间：<span class="badge badge-light">' + a.data[e].time + "</span></p></div></a>")
             }
         }

@@ -140,6 +140,73 @@
             </div>
         </div>
     </div>
+    <div class="card shadow mb-4" id="chartss">
+        <div class="card-body">
+            <div class="row align-items-center my-4">
+                <div class="col-md-4">
+                    <div class="mx-4">
+                        <h3>
+                            访问统计
+                        </h3>
+                        <p class="text-muted">
+                            数据源于生活，统计解析未来
+                        </p>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col-6">
+                            <div class="p-4">
+                                <p class="small text-uppercase text-muted mb-0">
+                                    今日总人数
+                                </p>
+                                <span class="h2 mb-0" id="today_visitors">
+									0
+								</span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="p-4">
+                                <p class="small text-uppercase text-muted mb-0">
+                                    今日访问次数
+                                </p>
+                                <span class="h2 mb-0" id="today_visits">
+									0
+								</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col-6">
+                            <div class="p-4">
+                                <p class="small text-uppercase text-muted mb-0">
+                                    总访问人数
+                                </p>
+                                <span class="h2 mb-0" id="total_visitors">
+									0
+								</span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="p-4">
+                                <p class="small text-uppercase text-muted mb-0">
+                                    总访问次数
+                                </p>
+                                <span class="h2 mb-0" id="total_visits">
+									0
+								</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="mr-4">
+                        <div id="revenue-visit" class="apex-charts mt-3" data-colors="#727cf5,#0acf97">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row" id="log">
         <div class="col-md-12">
             <div class="card shadow eq-card">
@@ -236,7 +303,7 @@
         }
 
         function census(e) {
-            $("#user_count").html(e.user.count), $("#user_diary_count").html(e.user.diary_count), $("#kami_count").html(e.kami.count), $("#kami_use_count").html(e.kami.use_count), $("#message_wait_count").html(e.message.wait_count), $("#message_count").html(e.message.count), $("#order_day_money").html(e.order.day_money), $("#order_total_money").html(e.order.total_money), $("#order_all_os").html(e.order.all_os), $("#order_ali_os").html(e.order.ali_os), $("#order_wx_os").html(e.order.all_os - e.order.ali_os), order_census(e.order.census), logs(e.logs)
+            $("#user_count").html(e.user.count), $("#user_diary_count").html(e.user.diary_count), $("#kami_count").html(e.kami.count), $("#kami_use_count").html(e.kami.use_count), $("#message_wait_count").html(e.message.wait_count), $("#message_count").html(e.message.count), $("#order_day_money").html(e.order.day_money), $("#order_total_money").html(e.order.total_money), $("#order_all_os").html(e.order.all_os), $("#order_ali_os").html(e.order.ali_os), $("#order_wx_os").html(e.order.all_os - e.order.ali_os), $("#today_visitors").html(e.visits.today_visitors), $("#today_visits").html(e.visits.today_visits), $("#total_visitors").html(e.visits.total_visitors), $("#total_visits").html(e.visits.total_visits), order_census(e.order.census), visit_census(e.visit_stats),logs(e.logs)
         }
 
         function logs(e) {
@@ -272,6 +339,33 @@
                 }
             };
             new ApexCharts(document.querySelector("#revenue-chart"), s).render()
+        }
+
+        function visit_census(e) {
+            var t = e.date, s = {
+                chart: {
+                    height: 350,
+                    type: "line",
+                    zoom: {enabled: !1},
+                    toolbar: {show: !1},
+                    dropShadow: {enabled: !0, opacity: .2, blur: 7, left: -7, top: 7}
+                },
+                dataLabels: {enabled: !1},
+                stroke: {curve: "smooth", width: 4},
+                series: [{name: "总次数", data: e.visits}, {name: "总人数", data: e.visitors}],
+                colors: ["#727cf5", "#0acf97", "#fa5c7c", "#ffbc00"],
+                zoom: {enabled: !1},
+                legend: {show: !1},
+                xaxis: {type: "string", categories: t, tooltip: {enabled: !1}, axisBorder: {show: !1}},
+                yaxis: {
+                    labels: {
+                        formatter: function (e) {
+                            return e + "人/次"
+                        }, offsetX: -15
+                    }
+                }
+            };
+            new ApexCharts(document.querySelector("#revenue-visit"), s).render()
         }
     </script>
 <?php include_once 'footer.php'; ?>

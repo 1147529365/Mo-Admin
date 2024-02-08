@@ -175,3 +175,24 @@ function arrSign($arr,$key){//签名
 	}
 	return md5(rtrim($data,"&").$key);
 }
+
+/**
+ * 取近期时间 Y-m-d 格式
+ * $day:天
+ * $type：d=日期，w=周
+ * $load：false=正数，true=负数
+ * return string
+ **/
+function dateArrY($day = 0,$type = 'd',$load = true){
+    $date = [];
+    $week = ["周日","周一","周二","周三","周四","周五","周六"];
+    for ($i=0; $i<$day; $i++){
+        if($load){
+            $res = ($type == 'd') ? date('Y-m-d', strtotime(-$i.' day')):$week[date('w', strtotime(-$i.' day'))];
+        }else{
+            $res = ($type == 'd') ? date('Y-m-d', strtotime($i.' day')):$week[date('w', strtotime($i.' day'))];
+        }
+        $date[$i] = $res;
+    }
+    return $date;
+}
